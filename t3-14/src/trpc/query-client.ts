@@ -21,9 +21,16 @@ export const createQueryClient = () =>
       dehydrate: {
         serializeData: SuperJSON.serialize,
         shouldDehydrateQuery: (query) => {
-          console.log(query.queryHash, "🔥 Before", query.state.dataUpdatedAt);
+          console.log(
+            {
+              queryHash: query.queryHash,
+              dataUpdatedAt: query.state.dataUpdatedAt,
+            },
+            "🔥",
+          );
+          // console.log(query.queryHash, "🔥 Before", query.state.dataUpdatedAt);
           // query.state.dataUpdatedAt = Date.now(); //             <--------------A workaround for the above
-          console.log(query.queryHash, "🔥 After", query.state.dataUpdatedAt);
+          // console.log(query.queryHash, "🔥 After", query.state.dataUpdatedAt);
           return (
             defaultShouldDehydrateQuery(query) ||
             query.state.status === "pending"
